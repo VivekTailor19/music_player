@@ -21,14 +21,18 @@ class _Music_PlayState extends State<Music_Play> {
   MusicPlayerProvider? mppT;
   MusicPlayerProvider? mppF;
 
+
   @override
   void initState() {
-    Provider.of<MusicPlayerProvider>(context,listen: false).initmusic();
+    Provider.of<MusicPlayerProvider>(context,listen: false).initmusic(Provider.of<MusicPlayerProvider>(context,listen: false).number!);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+
+    mppT!.number = ModalRoute.of(context)!.settings.arguments as int;
+
 
     mppT = Provider.of<MusicPlayerProvider>(context,listen: true);
     mppF = Provider.of<MusicPlayerProvider>(context,listen: false);

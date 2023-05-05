@@ -1,22 +1,32 @@
 import 'package:flutter/cupertino.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
 
+import 'musicmodel.dart';
+
 class MusicPlayerProvider extends ChangeNotifier
 {
 
-  List<String> MusicItems =[];
+  int? number;
+
+
+  List<MusicModel> musicItems =[
+    MusicModel(name: "Zindagi",path: Audio("assets/audio/zindagi.mp3")),
+    MusicModel(name: "Machayenge",path: Audio("assets/audio/machayenge.mp3")),
+  ];
 
 
   AssetsAudioPlayer audioPlayer = AssetsAudioPlayer();
 
   bool ismusic = false;
 
-  void initmusic()
+  void initmusic(int number)
   {
-    audioPlayer.open(Playlist(audios: [
+    audioPlayer.open(Playlist(
+      audios: [
       Audio("assets/audio/zindagi.mp3"),
       Audio("assets/audio/machayenge.mp3"),
-    ],),autoStart: false,showNotification: true);
+    ],startIndex: number
+    ),autoStart: false,showNotification: true,loopMode: LoopMode.playlist);
     musiclength();
   }
 
