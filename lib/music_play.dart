@@ -85,20 +85,14 @@ class _Music_PlayState extends State<Music_Play> {
                           )),
                       FloatingActionButton(
                         onPressed: () {
+                          mppF!.musicrun();
 
-                          if(mppF!.ismusic == true)
-                          {
-                            mppF!.audioPlayer.pause();
-                          }
-                          else
-                          {
-                            mppF!.audioPlayer.play();
-                          }
+
 
 
                         },
                         child: Icon(
-                          mppT!.ismusic ? Icons.pause : Icons.play_arrow_rounded,
+                          mppT!.ismusic ? Icons.play_arrow_rounded : Icons.pause,
                           color: Colors.white,
                         ),
                         backgroundColor: Colors.amber.shade900,
@@ -140,3 +134,15 @@ class _Music_PlayState extends State<Music_Play> {
     );
   }
 }
+
+
+
+
+// if(mppF!.audioPlayer.isPlaying.value)
+// {
+//   mppF!.pausemusic();
+// }
+// else
+// {
+//   mppF!.playmusic();
+// }

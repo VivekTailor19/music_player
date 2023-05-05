@@ -15,27 +15,28 @@ class MusicPlayerProvider extends ChangeNotifier
 
   void musicrun()
   {
-    if(ismusic == true)
+    if(audioPlayer.isPlaying.value)
     {
-      audioPlayer.play();
+      pausemusic();
     }
     else
     {
-     audioPlayer.pause();
+      playmusic();
     }
+
   }
   void pausemusic()
   {
-    ismusic = true;
     audioPlayer.pause();
+    ismusic = true;
     notifyListeners();
-
   }
   void playmusic()
   {
-    ismusic = false;
     audioPlayer.play();
+    ismusic = false;
     notifyListeners();
+
   }
 
 
