@@ -4,13 +4,19 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 class MusicPlayerProvider extends ChangeNotifier
 {
 
+  List<String> MusicItems =[];
+
+
   AssetsAudioPlayer audioPlayer = AssetsAudioPlayer();
 
   bool ismusic = false;
 
   void initmusic()
   {
-    audioPlayer.open(Audio("assets/audio/zindagi.mp3"),autoStart: false,showNotification: true,);
+    audioPlayer.open(Playlist(audios: [
+      Audio("assets/audio/zindagi.mp3"),
+      Audio("assets/audio/machayenge.mp3"),
+    ],),autoStart: false,showNotification: true);
     musiclength();
   }
 
@@ -55,6 +61,15 @@ class MusicPlayerProvider extends ChangeNotifier
     ismusic = false;
     notifyListeners();
 
+  }
+
+  void playnext()
+  {
+    audioPlayer.next();
+  }
+  void playpreviews()
+  {
+    audioPlayer.next();
   }
 
 

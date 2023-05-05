@@ -1,7 +1,7 @@
 
 
 import 'package:assets_audio_player/assets_audio_player.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -62,6 +62,7 @@ class _Music_PlayState extends State<Music_Play> {
                         thumbColor: Colors.red,
                         value: position.inSeconds.toDouble(),
                         onChanged: (value) {
+
                           position = Duration(seconds: value.toInt());
                           mppF!.audioPlayer.seek(position);
 
@@ -88,7 +89,9 @@ class _Music_PlayState extends State<Music_Play> {
                                 color: Colors.amber.shade900,
                               )),
                           IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                mppF!.playpreviews();
+                                },
                               icon: Icon(
                                 Icons.skip_previous,
                                 color: Colors.amber.shade900,
@@ -105,7 +108,9 @@ class _Music_PlayState extends State<Music_Play> {
                             backgroundColor: Colors.amber.shade900,
                           ),
                           IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                mppF!.playnext();
+                              },
                               icon: Icon(
                                 Icons.skip_next,
                                 color: Colors.amber.shade900,
