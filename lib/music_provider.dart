@@ -3,13 +3,30 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 
 class MusicPlayerProvider extends ChangeNotifier
 {
+
   AssetsAudioPlayer audioPlayer = AssetsAudioPlayer();
+
   bool ismusic = false;
 
   void initmusic()
   {
     audioPlayer.open(Audio("assets/audio/zindagi.mp3"),autoStart: false,showNotification: true,);
-    notifyListeners();
+    musiclength();
+  }
+
+  Duration musictime = Duration(seconds: 0);
+
+  void musiclength()
+  {
+    audioPlayer.current.listen((event)
+    {
+      musictime = event!.audio.duration;
+      notifyListeners();
+    });
+  }
+
+  void musicseek()
+  {
 
   }
 
@@ -31,6 +48,7 @@ class MusicPlayerProvider extends ChangeNotifier
     ismusic = true;
     notifyListeners();
   }
+
   void playmusic()
   {
     audioPlayer.play();

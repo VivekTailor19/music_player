@@ -1,5 +1,6 @@
 
 
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -48,70 +49,80 @@ class _Music_PlayState extends State<Music_Play> {
             ),
             Align(
               alignment: Alignment(0, 0.85),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Slider(
-                    activeColor: Colors.red,
-                    value: 0.4,
-                  onChanged: (value) {
-
-                  },
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("00:00",style: TextStyle(fontSize: 15,color: Colors.teal),),
-                        Text("00:00",style: TextStyle(color: Colors.teal),),
-                      ],
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+              child: PlayerBuilder.currentPosition(
+                player: mppF!.audioPlayer,
+                builder: (context, position) {
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.loop,
-                            color: Colors.amber.shade900,
-                          )),
-                      IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.skip_previous,
-                            color: Colors.amber.shade900,
-                          )),
-                      FloatingActionButton(
-                        onPressed: () {
-                          mppF!.musicrun();
-
-
+                      Slider(
+                        activeColor: Colors.red.shade900,
+                        inactiveColor: Colors.lightGreen,
+                        max: mppT!.musictime.inSeconds.toDouble(),
+                        thumbColor: Colors.red,
+                        value: position.inSeconds.toDouble(),
+                        onChanged: (value) {
+                          position = Duration(seconds: value.toInt());
+                          mppF!.audioPlayer.seek(position);
 
 
                         },
-                        child: Icon(
-                          mppT!.ismusic ? Icons.play_arrow_rounded : Icons.pause,
-                          color: Colors.white,
-                        ),
-                        backgroundColor: Colors.amber.shade900,
                       ),
-                      IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.skip_next,
-                            color: Colors.amber.shade900,
-                          )),
-                      IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.favorite_border_rounded,
-                            color: Colors.amber.shade900,
-                          )),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("${position.inSeconds}",style: TextStyle(fontSize: 15,color: Colors.teal),),
+                            Text("${mppT!.musictime.inSeconds}",style: TextStyle(color: Colors.teal),),
+                          ],
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.loop,
+                                color: Colors.amber.shade900,
+                              )),
+                          IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.skip_previous,
+                                color: Colors.amber.shade900,
+                              )),
+                          FloatingActionButton(
+                            onPressed: () {
+                              mppF!.musicrun();
+
+                            },
+                            child: Icon(
+                              mppT!.ismusic ? Icons.play_arrow_rounded : Icons.pause,
+                              color: Colors.white,
+                            ),
+                            backgroundColor: Colors.amber.shade900,
+                          ),
+                          IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.skip_next,
+                                color: Colors.amber.shade900,
+                              )),
+                          IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.favorite_border_rounded,
+                                color: Colors.amber.shade900,
+                              )),
+                        ],
+                      ),
                     ],
-                  ),
-                ],
+                  );
+                },
+
+
               ),
             ),
 
