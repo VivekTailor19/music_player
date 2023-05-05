@@ -31,20 +31,24 @@ class _Music_HouseState extends State<Music_House> {
             padding: const EdgeInsets.all(15),
             child: InkWell(
               onTap: () {
-                Navigator.pushNamed(context, "musicitem",arguments: index);
+
+                mppF!.mno = index;
+                Navigator.pushNamed(context, "musicitem");
+               // Navigator.pushNamed(context, "musicitem",arguments: index);
+
               },
               child: Container(
                 height: 150,width: 150,
                 color: Colors.lightBlueAccent.shade100,
                 alignment: Alignment.center,
-                child: Text("${mppT!.musicItems[index].name}",style: TextStyle(fontSize: 15),),
+                child: Text("${mppT!.milist[index].name}",style: TextStyle(fontSize: 15),),
               ),
             ),
           );
 
         },
         scrollDirection: Axis.vertical,
-        itemCount: mppF!.musicItems.length,)
+        itemCount: mppF!.milist.length,)
         )
 
     );

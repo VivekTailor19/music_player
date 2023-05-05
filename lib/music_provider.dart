@@ -6,28 +6,32 @@ import 'musicmodel.dart';
 class MusicPlayerProvider extends ChangeNotifier
 {
 
-  int? number;
 
 
-  List<MusicModel> musicItems =[
+  List<MusicModel> milist =[
     MusicModel(name: "Zindagi",path: Audio("assets/audio/zindagi.mp3")),
     MusicModel(name: "Machayenge",path: Audio("assets/audio/machayenge.mp3")),
   ];
+  int temp = 0;
+
 
 
   AssetsAudioPlayer audioPlayer = AssetsAudioPlayer();
+  int mno = 0;
 
   bool ismusic = false;
 
-  void initmusic(int number)
+  void initmusic()
   {
     audioPlayer.open(Playlist(
       audios: [
       Audio("assets/audio/zindagi.mp3"),
       Audio("assets/audio/machayenge.mp3"),
-    ],startIndex: number
+    ],startIndex:mno
     ),autoStart: false,showNotification: true,loopMode: LoopMode.playlist);
     musiclength();
+    temp = mno;
+    notifyListeners();
   }
 
   Duration musictime = Duration(seconds: 0);
@@ -39,11 +43,6 @@ class MusicPlayerProvider extends ChangeNotifier
       musictime = event!.audio.duration;
       notifyListeners();
     });
-  }
-
-  void musicseek()
-  {
-
   }
 
   void musicrun()
@@ -75,10 +74,14 @@ class MusicPlayerProvider extends ChangeNotifier
 
   void playnext()
   {
+    // temp = mno++;
+    // notifyListeners();
     audioPlayer.next();
   }
   void playpreviews()
   {
+    // temp = mno--;
+    // notifyListeners();
     audioPlayer.next();
   }
 
